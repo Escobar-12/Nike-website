@@ -6,7 +6,7 @@ import { footerLinks } from "./constants";
 const Footer = ()=>
 {
     return (
-        <footer id="footer" className="w-full mx-auto px-4 lg:px-10 mt-30 max-sm:mt-20 bg-black min-h-screen">
+        <footer id="footer" className="w-full mx-auto px-4 lg:px-10 mt-30 max-sm:mt-20 bg-black ">
             <div className="flex max-w-[1440px] mx-auto flex-col justify-center items-start py-15 gap-10">
                 <div className="flex flex-col gap-4">
                     <img src={footerLogo} alt="" className="w-[130px]"/>
