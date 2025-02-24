@@ -2,6 +2,7 @@ import { products } from "./constants";
 import PopProductCard from "./components/PopularProductCard";
 import { useRef, useState, useEffect } from "react";
 import {X} from "lucide-react"
+import shiftPics from "./components/PicsShift";
 
 function PopProducts() {
     const dialogRef = useRef(null);
@@ -27,9 +28,14 @@ function PopProducts() {
             dialogClose();
         }
     }   
-    function shiftPics()
+    function doShift(event)
     {
-
+        if(!products)
+        {
+            dialogClose();
+            return;
+        }
+        shiftPics(event,products,shoeImageDisplay,setShoeImageDisplay);
     }
 
     useEffect(() => 
@@ -39,19 +45,22 @@ function PopProducts() {
 
         dialogRef.current?.addEventListener("close", dialogClose);
         document.addEventListener("mousedown",checkOutClick);
-        document.addEventListener("keydown",shiftPics)
+        document.addEventListener("keydown",doShift)
 
         return () => {
             dialogRef.current?.removeEventListener("close",dialogClose);
             document.removeEventListener("mousedown",checkOutClick);
+            document.removeEventListener("keydown",doShift)
         }
     }, [shoeImageDisplay]);
 
     return (
         <>
             {shoeImageDisplay &&
-            <dialog ref={dialogRef} className="min-h-screen min-w-screen flex justify-center items-center m-auto border-none rounded-3xl bg-black/80 ">
-                <div ref={imgRef} className="relative">
+            <dialog ref={dialogRef} className="min-h-screen min-w-screen flex justify-center items-center m-auto bg-black/80 border-none">
+                <div ref={imgRef} className="relative"
+                    style={{aspectRatio: shoeImageDisplay && `${shoeImageDisplay.width}/${shoeImageDisplay.height}`}}
+                    >
                     <img  src={shoeImageDisplay} alt="ShoeImage"/>
                     <X className="absolute  -right-2 -top-2 bg-[#f77162] rounded-full h-7 w-7 p-1" onClick={dialogClose}/>
                 </div>
@@ -68,9 +77,7 @@ function PopProducts() {
                     <div className="mt-5 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 sm:gap-4 gap-15 mx-auto">
                         {products.map((product) => (
                             <div key={product.name}>
-                                <button className="cursor-pointer" onClick={() => showImage(product)}>
-                                    <PopProductCard {...product} />
-                                </button>
+                                    <PopProductCard product={product} showImage={showImage} />
                             </div>  
                         ))}
                     </div>

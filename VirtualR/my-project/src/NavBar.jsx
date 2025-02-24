@@ -7,7 +7,6 @@ import useButtonHoverEffect from "./components/ButtonHoverjs";
 function NavigationBar()
 {
     const [mobileStackOpen,setMobileStackOpen] = useState(false);
-    const [colorSceme,setColorSceme] = useState('dark');
 
     const toggleNavBar = () =>
     {
@@ -41,7 +40,14 @@ function NavigationBar()
                     <ul className=" hidden lg:flex justify-center items-center gap-5 ">
                         {navLinks.map((link,index)=>(
                             <li key={index} className="text-lg text-gray-500 leading-normal hover:text-[#f25a49]">
-                                <a href={link.href}>{link.label}</a>
+                                <a
+                                className="cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const targetSec = document.querySelector(link.href);
+                                    targetSec?.scrollIntoView({ behavior: "smooth" });
+                                }}>
+                                {link.label}</a>
                             </li>
                         ))}
                     </ul>
@@ -62,7 +68,12 @@ function NavigationBar()
                             <ul className="space-y-5 text-center">
                             {navLinks.map((link,index)=>(
                                 <li key={index} onClick={toggleNavBar} className=" text-lg text-slate-200 leading-normal hover:text-[#f25a49]">
-                                    <a href={link.href}>{link.label}</a>
+                                    <a className="cursor-pointer" onClick={(e)=>{
+                                        e.preventDefault();
+                                        const targetSec = document.getElementById(link.href.replace("#",""));
+                                        targetSec?.scrollIntoView({behavior:"smooth"})
+                                    }} 
+                                    >{link.label}</a>
                                 </li>
                             ))}
                             </ul>
