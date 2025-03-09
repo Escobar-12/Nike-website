@@ -29,7 +29,8 @@
     position: absolute;
     width: 0;
     height: 0;
-    background: radial-gradient(circle, rgba(255, 255, 255, .9), transparent);
+    background: radial-gradient(circle, rgba(255, 255, 255, 1), transparent );
+    border-radius: 100%;
     opacity: 0;
     z-index: 0;
     top: var(--mouse-y, 50%);

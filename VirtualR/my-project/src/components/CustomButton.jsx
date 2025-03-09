@@ -1,15 +1,20 @@
+import { Link } from "react-router-dom";
+
 const ButtonCustom = ({
-        href= "#",
-        label= "Click Me",
-        imgsrc= null,
-        large= true,}) =>
+    href = "/",
+    label = "Click Me",
+    imgsrc = null,
+    large = true,
+    textCenter=false,
+    bold = false,
+}) =>
 {
     return (
-        <a href={href} className="thisButton inline-flex items-center gap-2 px-4 py-2 bg-[#f77162] text-white rounded-full">
-            <span className={`${large?"text-xl":"text-md"}`}>{label}</span>
+        <button  className={`thisButton inline-flex items-center gap-2 px-4 py-2 bg-[#f77162] text-white rounded-full ${textCenter?"justify-center" : ""}`}>
+            <span className={`${large?"text-xl":"text-md"} ${bold?"font-semibold":""}`}>{label}</span>
             {imgsrc && <img src={imgsrc} alt="icon" className=" z-20 w-5 h-5 border-2 rounded-full border-[#f77162]" />}
 
-        </a>
+        </button>
     );
 };
 
