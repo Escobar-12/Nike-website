@@ -31,7 +31,7 @@ export const handleRegister = async (req, res) => {
             userDB = [];
         }
 
-        if (userDB.find(u => u.username === user)) {
+        if (userDB.find(u => u.user === user)) {
             return res.status(400).json({ message: "Username already taken" });
         }
 
@@ -42,10 +42,8 @@ export const handleRegister = async (req, res) => {
         // Add new user to DB
         userDB.push(newUser);
         await fs.writeFile(userDBPath, JSON.stringify(userDB, null, 2));
-        const filedata = await fs.readFile(userDBPath,'utf-8');
-        console.log(JSON.parse(filedata));
         console.log("User registered:", newUser);
-        res.status(201).json(filedata);
+        res.sendStatus(201);
     } catch (err) {
         console.error(err);
         res.status(500).json({ message: "Internal server error" });

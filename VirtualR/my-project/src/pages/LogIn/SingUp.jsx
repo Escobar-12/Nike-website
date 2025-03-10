@@ -5,7 +5,7 @@ import useButtonHoverEffect from "../../components/ButtonHoverjs";
 import ButtonCustom  from "../../components/CustomButton";
 
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[a-zA-z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -18,6 +18,7 @@ function Signup({func})
 
     const userRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
     
     const [user, setUser] = useState();
     const [validName, setValidName] = useState(false);
@@ -60,34 +61,60 @@ function Signup({func})
         setErr('');
     },[user,pwd,matchPwd]); 
 
-    const handleRegister = async (e)=>
+    const autoLogIn = async ()=>
     {
-        e.preventDefault();
-        // recheck submission 
-        if( !USER_REGEX.test(user) || !PWD_REGEX.test(pwd) || !setValidMatch)
-        {
-            setErr("Invalid username or password.");
-            return;
-        }
-        try{
-            const res = await fetch('http://localhost:4000/singup', {
+        const loginRes = await fetch('http://localhost:5000/login/signin',
+            {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name: user,
+                    user: user,
+                    password: pwd
+                })
+            }
+        );
+        if(!loginRes.ok)
+        {
+            const errData = await loginRes.json();
+            navigate('/login');
+            throw new Error(errData.message);
+        }
+        setSuccess(true);
+        setErr("");
+        
+        navigate("/");
+    }
+
+    const handleRegister = async (e)=>
+    {
+        e.preventDefault();
+        // recheck submission 
+        if( !USER_REGEX.test(user) || !PWD_REGEX.test(pwd) || !validMatch)
+        {
+            setErr("Invalid username or password.");
+            return;
+        }
+        try{
+            const registerRes = await fetch('http://localhost:5000/login/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user: user,
                     password: pwd
                 })
             });
 
-            if(!res.ok)
+            if(!registerRes.ok)
             {
-                throw new Error("Login failed. Please check your credentials.");
+                const errData = await registerRes.json();
+                throw new Error(errData.message);
             }
 
-            setSuccess(true);
-            setErr("");
+            await autoLogIn();
         } catch (error) {
             setErr(error.message);
         }
@@ -96,7 +123,7 @@ function Signup({func})
     return(
         <section className="flex justify-center items-center min-h-screen text-white">
             <div className="flex flex-col bg-neutral-800 shadow-lg sm:w-[60vw] w-full max-w-md border p-6 rounded-xl gap-6">
-                {err && ( <p ref={errRef}  aria-live="assertive">
+                {err && ( <p ref={errRef}  aria-live="assertive" className="text-red-500 text-center">
                     {err}
                 </p>)}
                 <h1 className="font-semibold text-3xl text-center ">Register</h1>
@@ -181,7 +208,7 @@ function Signup({func})
                         Must match the first password input field.
                     </p>
 
-                    <ButtonCustom label='Sing Up' textCenter={true} large={true} bold={true}/>
+                    <ButtonCustom label='Sing Up' textCenter={true} large={true} bold={true} onClick={handleRegister}/>
                     
 
                 </form>

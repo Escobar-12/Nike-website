@@ -62,7 +62,7 @@ export const handleLogin = async (req, res) => {
 
         await fs.writeFile(userDBPath, JSON.stringify(updatedUserDB, null, 2));
 
-        res.cookie("jwt", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+        res.cookie("jwt", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // secure:true
         res.json({ accessToken });
     }
     catch(err)

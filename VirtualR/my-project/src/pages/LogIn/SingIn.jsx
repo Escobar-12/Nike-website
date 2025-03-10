@@ -5,7 +5,7 @@ import useButtonHoverEffect from "../../components/ButtonHoverjs";
 import ButtonCustom  from "../../components/CustomButton";
 
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const USER_REGEX = /^[A-z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -18,6 +18,7 @@ function Signin({ func })
 
     const userRef = useRef();
     const errRef = useRef();
+    const navigate = useNavigate();
     
     const [user, setUser] = useState();
     const [validName, setValidName] = useState(false);
@@ -62,33 +63,39 @@ function Signin({ func })
         }
     
         try {
-            const res = await fetch('http://localhost:4000/api/login', {
+            const res = await fetch('http://localhost:5000/login/signin', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    name: user,
+                    user: user,
                     password: pwd
                 })
             });
     
             if (!res.ok) {
-                throw new Error("Login failed. Please check your credentials.");
+                const errData = await res.json();
+                throw new Error(errData.message);
             }
+
+            const data = await res.json(); 
+            console.log(data.accessToken);
             setSuccess(true);
             setErr("");
+
+            navigate('/');
+
         } catch (error) {
             setErr(error.message);
         }
     };
     
-    
 
     return(
         <section className="flex justify-center items-center min-h-screen text-white">
-            <div className="flex flex-col bg-neutral-800 shadow-lg sm:w-[60vw] w-full max-w-md border p-6 rounded-xl gap-6">
-                {err && ( <p ref={errRef}  aria-live="assertive">
+            <div className="flex flex-col bg-neutral-800 shadow-lg w-full max-w-md max-sm:max-w-[60vw]  border p-6 rounded-xl gap-6">
+                {err && ( <p ref={errRef}  aria-live="assertive" className="text-red-500 text-center">
                     {err}
                 </p>)}
                 <h1 className="font-semibold text-3xl text-center ">Log In</h1>
@@ -142,7 +149,7 @@ function Signin({ func })
                     </label>
                     
                     <p id="pwdnote"
-                        className={pwdFocus && pwd && !validPwd ? "instructions" : "offscreen"}>
+                        className={` text-lg text-gray-400 ${pwdFocus && pwd && !validPwd ? "instructions" : "offscreen"}`}>
                         <FontAwesomeIcon icon={faInfoCircle}/>
                         8 to 24 chars. <br/>
                         Must include upper and lower case letters, numbers and special symbols ! @ # $ %<br/>

@@ -3,20 +3,44 @@ import dotenv from "dotenv"
 import { connectDB } from "./config/db.js";
 import router from "./routes/login.routes.js";
 import cors from 'cors'
+import verifyJWT from "./middleware/verifyJWT.js";
+import cookieParser from "cookie-parser";
+
+import fs from "fs/promises";
+import { fileURLToPath } from "url";
+import path from "path"
+import { handleLogOut } from "./controllers/logoutController.js";
 
 dotenv.config();
 const app = express();
-const Port = process.env.Port || 5000;
+const Port = process.env.Port || 5004;
 
+app.use(cors());
 app.use(express.json());
-app.use(cors())
+app.use(cookieParser());
+
+
+app.use('/login',router);
+app.get('/logout',handleLogOut);
+
 
 app.get('/',(req,res)=>
 {
     res.sendStatus(200)
 });
 
-app.use('/login',router);
+app.use(verifyJWT);
+
+app.get('/db',async (req,res)=>
+{
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    const pathtoDB = path.join(__dirname,'config','userDB.json');
+    const data = await fs.readFile(pathtoDB,'utf-8');
+    console.log(data);
+    res.sendStatus(200);
+})
+
 
 app.listen(Port,()=>
 {

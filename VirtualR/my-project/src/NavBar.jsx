@@ -4,9 +4,11 @@ import {navLinks} from "./constants/index"
 import { Menu, X } from "lucide-react";
 import useButtonHoverEffect from "./components/ButtonHoverjs";
 import { Link } from "react-router-dom";
+import { useAuth } from "./Context/authContext";
 
 function NavigationBar()
 {
+    const { isLoggedIn, logout } = useAuth();
     const [mobileStackOpen,setMobileStackOpen] = useState(false);
 
     const toggleNavBar = () =>
@@ -54,8 +56,20 @@ function NavigationBar()
                     </ul>
                 </div>
                 <div className="hidden lg:flex justify-center items-center gap-2 text-lg text-slate-200 ">
-                    <Link to={"/login"} className="thisButton pButton font-bold px-2 py-1 m-1 bg-[#f25a49] rounded "><span className="relative z-10">Sign in</span></Link>
-                    <a href="#home" className="thisButton sButton font-bold px-2 py-1 m-1 text-[#f25a49] rounded border-2"><span className="relative z-10">Explore now</span></a>
+
+                {isLoggedIn ?
+                    ( 
+                        <button onClick={logout} className="pButton font-bold px-2 py-1 m-1 bg-red-500 rounded">
+                        Logout
+                        </button>
+                    ):
+                    (
+                        <>
+                            <Link to={"/login"} className="thisButton pButton font-bold px-2 py-1 m-1 bg-[#f25a49] rounded "><span className="relative z-10">Sign in</span></Link>
+                            <a href="#home" className="thisButton sButton font-bold px-2 py-1 m-1 text-[#f25a49] rounded border-2"><span className="relative z-10">Explore now</span></a>
+                        </>
+                    )
+                }
                 </div>
                 <div className="lg:hidden md:flex">
                     <button onClick={toggleNavBar}>
