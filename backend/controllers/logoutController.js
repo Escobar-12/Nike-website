@@ -29,7 +29,7 @@ export const handleLogOut =async (req, res) => {
 
         const userFound = userDB.find(person => person.refreshToken === refreshToken);
         if (!userFound) {
-            res.clearCookie('jwt',{ httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // secure:true
+            res.clearCookie('jwt',{ httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite:"None", secure:true }); // secure:true
             return res.sendStatus(403);
         }
         // delete token from DB
@@ -40,7 +40,7 @@ export const handleLogOut =async (req, res) => {
         const updatedUserDB = [...otherUsers, currentUser];
 
         await fs.writeFile(userDBPath, JSON.stringify(updatedUserDB, null, 2));
-        res.clearCookie('jwt',{ httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // secure:true
+        res.clearCookie('jwt',{ httpOnly: true, maxAge: 24 * 60 * 60 * 1000 , sameSite:"None", secure:true}); // secure:true
         res.status(200).json({ message: "Logged out successfully" });
 
     }

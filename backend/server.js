@@ -5,6 +5,8 @@ import router from "./routes/login.routes.js";
 import cors from 'cors'
 import verifyJWT from "./middleware/verifyJWT.js";
 import cookieParser from "cookie-parser";
+import { corsOptions } from "./config/corsOrigins.js";
+import { credentials } from "./middleware/credentials.js";
 
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
@@ -15,7 +17,8 @@ dotenv.config();
 const app = express();
 const Port = process.env.Port || 5004;
 
-app.use(cors());
+app.use(credentials);
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 

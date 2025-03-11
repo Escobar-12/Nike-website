@@ -3,7 +3,9 @@ import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icon
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import useButtonHoverEffect from "../../components/ButtonHoverjs";
 import ButtonCustom  from "../../components/CustomButton";
+import { useAuth } from "../../Context/authContext";
 
+import { useRegister } from "./Lognin";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -11,10 +13,11 @@ const USER_REGEX = /^[a-zA-z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 
-
 function Signup({func})
 {
     useButtonHoverEffect();
+    const {login} = useAuth();
+    const {toggleForm} = useRegister();
 
     const userRef = useRef();
     const errRef = useRef();
@@ -61,31 +64,6 @@ function Signup({func})
         setErr('');
     },[user,pwd,matchPwd]); 
 
-    const autoLogIn = async ()=>
-    {
-        const loginRes = await fetch('http://localhost:5000/login/signin',
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    user: user,
-                    password: pwd
-                })
-            }
-        );
-        if(!loginRes.ok)
-        {
-            const errData = await loginRes.json();
-            navigate('/login');
-            throw new Error(errData.message);
-        }
-        setSuccess(true);
-        setErr("");
-        
-        navigate("/");
-    }
 
     const handleRegister = async (e)=>
     {
@@ -113,8 +91,8 @@ function Signup({func})
                 const errData = await registerRes.json();
                 throw new Error(errData.message);
             }
-
-            await autoLogIn();
+            toggleForm();
+            navigate('/login');
         } catch (error) {
             setErr(error.message);
         }
@@ -153,8 +131,7 @@ function Signup({func})
                         <FontAwesomeIcon icon={faInfoCircle}/>
                         4 to 23 chars. <br/>
                         Must begin with a letter. <br/>
-                        Letters, numbers, underscores, hyphens allo
-                        wed  
+                        Letters, numbers, underscores, hyphens allowed  
                     </p>
 
                     

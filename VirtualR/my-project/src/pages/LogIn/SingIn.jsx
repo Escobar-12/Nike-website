@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import useButtonHoverEffect from "../../components/ButtonHoverjs";
 import ButtonCustom  from "../../components/CustomButton";
 
+import { useAuth } from "../../Context/authContext";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,11 +17,13 @@ function Signin({ func })
 {
     useButtonHoverEffect();
 
+    const { login } = useAuth();
+
     const userRef = useRef();
     const errRef = useRef();
     const navigate = useNavigate();
     
-    const [user, setUser] = useState();
+    const [user, setUser] = useState('');
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
     
@@ -80,8 +83,8 @@ function Signin({ func })
             }
 
             const data = await res.json(); 
-            console.log(data.accessToken);
             setSuccess(true);
+            login();
             setErr("");
 
             navigate('/');

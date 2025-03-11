@@ -25,7 +25,7 @@ const Footer = ()=>
                             <p className="text-lg">{Flink.title}</p>
                             <div className="flex flex-col gap-2 ">
                                 {Flink.links.map((link,index)=>(
-                                    <a key={index} className="text-sm text-gray-400 tracking-tight hover:text-white" href={link.link}>{link.name}</a>
+                                    <a key={index} className="text-sm text-gray-400 tracking-tight hover:text-white overflow-clip" href={link.link}>{link.name}</a>
                                 ))}
                             </div>
                         </div>
