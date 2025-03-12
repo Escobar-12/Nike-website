@@ -3,6 +3,7 @@ import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs/promises"
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -22,9 +23,12 @@ async function loadUserDB() {
 }
 
 export const handleRefreshToken =async (req, res) => {
-    const cookie = req.cookies;
-    if (!cookie?.jwt) return res.sendStatus(401);
-    const refreshToken = cookie.jwt;
+    if (!req.cookies?.jwt) {
+        console.log("No JWT cookie found");
+        return res.sendStatus(401);
+    }
+
+    const refreshToken = req.cookies.jwt;
 
     try
     {
@@ -34,13 +38,16 @@ export const handleRefreshToken =async (req, res) => {
         if (!userFound) {
             return res.sendStatus(403);
         }
-
+        const roles = Object.values(userFound.roles);
         jwt.verify(refreshToken,process.env.REFRESH_TOKEN_SECRET,
             (err,decoded) =>
             {
                 if(err || userFound.user === decoded.user) return res.sendStatus(403);
                 const accessToken = jwt.sign(
-                    { username: decoded.user },
+                    { userInfo:{
+                        username: decoded.user,
+                        roles:roles
+                    }},
                     process.env.ACCESS_TOKEN_SECRET,
                     { expiresIn: '30s' }
                 );

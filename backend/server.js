@@ -7,6 +7,8 @@ import verifyJWT from "./middleware/verifyJWT.js";
 import cookieParser from "cookie-parser";
 import { corsOptions } from "./config/corsOrigins.js";
 import { credentials } from "./middleware/credentials.js";
+import { allowedRoles } from "./config/allowedRoles.js";
+import { VerifyRoles } from "./middleware/verifyRoles.js";
 
 import fs from "fs/promises";
 import { fileURLToPath } from "url";
@@ -17,10 +19,10 @@ dotenv.config();
 const app = express();
 const Port = process.env.Port || 5004;
 
+app.use(cookieParser());
 app.use(credentials);
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use(cookieParser());
 
 
 app.use('/login',router);
@@ -34,7 +36,7 @@ app.get('/',(req,res)=>
 
 app.use(verifyJWT);
 
-app.get('/db',async (req,res)=>
+app.get('/db',VerifyRoles(allowedRoles.Admin,allowedRoles.Editor),async (req,res)=>
 {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);

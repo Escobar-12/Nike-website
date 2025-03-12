@@ -38,7 +38,7 @@ export const handleRegister = async (req, res) => {
 
         // Hash password
         const hashedPwd = await bcrypt.hash(password, 10);
-        const newUser = { user: user, password: hashedPwd };
+        const newUser = { user: user, roles:{"User":3000}, password: hashedPwd };
 
         // Add new user to DB
         userDB.push(newUser);

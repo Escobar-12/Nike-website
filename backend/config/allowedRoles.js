@@ -1,0 +1,1 @@
+export const allowedRoles = {"Admin":5000,"Editor":4000,"User":3000};

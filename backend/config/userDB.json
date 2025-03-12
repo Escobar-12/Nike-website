@@ -1,89 +1,16 @@
 [
   {
     "user": "michal",
-    "password": "$2b$10$TnGWqAC.k8lYcU8RyTY4De/nsDW0pkhsHrt1Qtp7f3.9Hiygsluuu",
-    "refreshToken": ""
-  },
-  {
-    "user": "mide",
-    "password": "$2b$10$LV5hn8RnVxl8t.3jvI/9eugg8SW0uvDlqIjP/fs50U4kcmIv99Ara",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pZGUiLCJpYXQiOjE3NDE1OTk0ODQsImV4cCI6MTc0MTY4NTg4NH0.DI00o0raDGqRR_diU8245d_QRsfBnrKBrMmQcdJg7fE"
-  },
-  {
-    "user": "Jack",
-    "password": "$2b$10$LIDeLG0uRKhtEiS35MUDV.5kvtrSuyUIlS/tl8xvfswpn1bPzDy82"
-  },
-  {
-    "user": "Jacky",
-    "password": "$2b$10$aNC.bmTt9qWAAUYqMcmAJeQ3nN35VhNQAwTLq8LYJ3tet8.9h5EBW"
-  },
-  {
-    "user": "Jackly",
-    "password": "$2b$10$1Dim0ETMFcG0fQc7YE2T0OFv3SQtQH4x9DL51U8eBD2I.na3rJ9hC"
-  },
-  {
-    "user": "Jackleen",
-    "password": "$2b$10$fIi/1BunQ8Lo8j3CGGjgM.pOghIj2ZqAVXjz3gyZiDJz.sgcRsKiq"
-  },
-  {
-    "user": "Jackleenly",
-    "password": "$2b$10$4GWD6xYVFmmQHC9x3ln7BOAx3U0E14QkKAKWtXsVtKHDY7N.trq0y"
-  },
-  {
-    "user": "Jackleenlygfg",
-    "password": "$2b$10$U1ZNJn4ZmrtCqV5DkqCCV.pKHHplPy1ajQe4wTAFI.mOnMtGrfbKe"
-  },
-  {
-    "user": "Jally",
-    "password": "$2b$10$Dox5kg9bGzmzgUu.SXNFpevE2fbItA8lQoG9mtUy06/wKsFu0ZKNa"
-  },
-  {
-    "user": "Jalleen",
-    "password": "$2b$10$Kff1kO2rSPskrwH5UbthH.ENm6HGyp/Rb3AmoDI6HfAP7pQPkHifS",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkphbGxlZW4iLCJpYXQiOjE3NDE2MDAxODQsImV4cCI6MTc0MTY4NjU4NH0.Ytsuzb17o-MFXcZ-co1E78MprlQ2FKd8mFJH-4R4ovs"
-  },
-  {
-    "user": "mememe",
-    "password": "$2b$10$uGDP98BoXhwT/nWNQPT8RuVigsvdOHv3n8leIJMlck009Yb7Y7enK",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1lbWVtZSIsImlhdCI6MTc0MTYwMDIzNSwiZXhwIjoxNzQxNjg2NjM1fQ.L7T9eaZP_9xavMjqkhslKpLIcbEeHnmMz7T6dvUPcZo"
-  },
-  {
-    "user": "Mikele",
-    "password": "$2b$10$aG8MbRbqz7CuS.FfoomKlOMdUqNg8wejkCDTQFELDM7xvbLJC.r8i",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pa2VsZSIsImlhdCI6MTc0MTYwNzI0NywiZXhwIjoxNzQxNjkzNjQ3fQ.u6fXgkwxq2CB1KXPnSmCfMdXZrpGsxmKxXW3s1w9apU"
+    "password": "$2b$10$hNNYjQXt5R8pCYm0crt0De7V9b1nS0U.qo7es7782pwG1yRC.Eh22",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1pY2hhbCIsImlhdCI6MTc0MTc1NjYwOSwiZXhwIjoxNzQxODQzMDA5fQ.Sn-IHDSuP0OP3MyOHQK0vWPDWoZcDuYdA9jsuDPHSVA"
   },
   {
     "user": "Mike",
-    "password": "$2b$10$QcaTt2K7fMd16DqiwYeQnOGb9L53cZ6WgTMugJkRltP/plrrIzaF2",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pa2UiLCJpYXQiOjE3NDE2OTYxODMsImV4cCI6MTc0MTc4MjU4M30.32FKWc0RqbDXgx9xF9p5-YU8QyW5xsehkPrioqZufls"
-  },
-  {
-    "user": "Lidia",
-    "password": "$2b$10$/GlncqKjUXy6ORONy03oWOFzS276Ap11OLeboyDN9TKPVZxYCqL9m"
-  },
-  {
-    "user": "Milody",
-    "password": "$2b$10$h1BVsVe8YMNRaPBscJ7nkuZb4Txu3WIFyxksZ3iv84q.O9ZptwL66"
-  },
-  {
-    "user": "lifd",
-    "password": "$2b$10$GyjsPo2LVxMrm4kvcdEEOuQC6RHxBztnZY5VrF1XaulLCrIRZ1U8."
-  },
-  {
-    "user": "Mikelolly",
-    "password": "$2b$10$rtTnm9aFCzZ/cYoPJIlD5ejo/I1jltoZl7YPzbIBTagKREos0wPIa"
-  },
-  {
-    "user": "Mikelol",
-    "password": "$2b$10$mXuoiJQLRB37GhkySmsLLO6/sdB8ZkNnM3U2Jy7fERZlZ2iNVyHP2"
-  },
-  {
-    "user": "Mikelolmlw",
-    "password": "$2b$10$fAP5AaOH6Xv8tQ90mUozTOSprEPzDkt9OMoOT1QUX4m/soiDUpR.G"
-  },
-  {
-    "user": "Link",
-    "password": "$2b$10$F88iD7ZbXT/LjYoB//Vtbu2YdoXAr6yFpk93zvwDtMf0GaMixw7b2",
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkxpbmsiLCJpYXQiOjE3NDE3MDYyNDksImV4cCI6MTc0MTc5MjY0OX0.3dpbUWzDST5ZdXZOh6YnXOL61KUy-NIWm7suheAvnMU"
+    "roles": {
+      "User": 3000,
+      "Admin": 5000
+    },
+    "password": "$2b$10$lgLJ5iNxp80lQVR0rWVt3eiIJbZ.ZjKpwXxcKR3x.Ciz1JgLwzAKq",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pa2UiLCJpYXQiOjE3NDE3NTc5NjcsImV4cCI6MTc0MTg0NDM2N30.mzYuP9x5LBZ4ObN8-8vB6bmk7J8YwF5CP_cpB8kmWZ0"
   }
 ]

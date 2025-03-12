@@ -35,16 +35,19 @@ export const handleLogin = async (req, res) => {
         if (!userFound) {
             return res.status(400).json({ success: false, message: "Username not found" });
         }
-
         // Check password
         const match = await bcrypt.compare(password,userFound.password);
         if (!match) {
             return res.status(401).json({ success: false, message: "Incorrect password" });
         }
-
+        const roles = Object.values(userFound.roles);
         // Generate JWTs
         const accessToken = jwt.sign(
-            { username: userFound.user },
+            { userInfo:{
+                username: userFound.user,
+                roles: roles
+                }
+            },
             process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '30s' }
         );
@@ -56,13 +59,13 @@ export const handleLogin = async (req, res) => {
         );
 
         const otherUsers = userDB.filter(person => person.user !== userFound.user);
-        const currentUser = { user: userFound.user, password: userFound.password, refreshToken };
+        const currentUser = { user: userFound.user,roles: userFound.roles, password: userFound.password, refreshToken };
 
         const updatedUserDB = [...otherUsers, currentUser];
 
         await fs.writeFile(userDBPath, JSON.stringify(updatedUserDB, null, 2));
 
-        res.cookie("jwt", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite:"None", secure:true }); // secure:true
+        res.cookie("jwt", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000, sameSite:"None" }); // secure:true
         res.json({ accessToken });
     }
     catch(err)
